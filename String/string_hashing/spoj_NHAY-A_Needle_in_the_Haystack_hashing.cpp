@@ -2,8 +2,11 @@
 using namespace std;
 typedef long long int ll;
 #define PB push_back
+#define VST(V) sort(V.begin(),V.end())
+#define VSTrev(V) sort(V.begin(),V.end(),greater<long long int>())
 #define fast ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 vector<ll>for_hash1;
+vector<ll>for_hash2;
 vector<ll>power_p;
 void pow_p()
 {
@@ -30,6 +33,20 @@ ll hash1(string S,ll status)
     }
     return ANS;
 }
+ll hash2(string S)
+{
+    ll P=31,M=1e9+9;
+    ll SIZ=S.size();
+    ll ANS=0;
+    ll POWER=1;
+    for(ll i=0; i<SIZ; i++)
+    {
+        ll VAL=(S[i]-'a'+1)*POWER;
+        ANS=((ANS%M)+(VAL%M))%M;
+        POWER=((POWER%M)*(P%M))%M;
+    }
+    return ANS;
+}
 ll seg_hash(ll l,ll r)
 {
     ll P=31,M=1e9+7;
@@ -47,7 +64,7 @@ int main()
 {
     pow_p();
     //freopen("1input.txt","r",stdin);
-    fast;
+    //fast;
     ll tcase=1;
     //cin>>tcase;
     for(ll test=1; test<=tcase; test++)
